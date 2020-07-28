@@ -1,1 +1,3 @@
-# Generic CRUD Backend written in PHP that stores data in a .json file
+# Generic CRUD Backend
+Written in PHP, stores data in a .json file.
+
