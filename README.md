@@ -1,2 +1,1 @@
-# generic-php-json-crud-backend
- 
+# Generic CRUD Backend written in PHP that stores data in a .json file
