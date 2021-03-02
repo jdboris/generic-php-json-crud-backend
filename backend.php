@@ -3,9 +3,10 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST,GET,PUT,DELETE");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
+$file = "items.json";
+
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     
-    $file = "items.json";
     if(is_file($file)){
         echo file_get_contents($file);
     } else {
@@ -14,13 +15,16 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $file = "items.json";
     if(!is_file($file)){
         file_put_contents($file, "[]");
     }
     $item = json_decode( file_get_contents("php://input") );
 
     $items = json_decode( file_get_contents($file) );
+    if( !$items ){
+        $items = [];
+    }
+    
     array_push( $items, $item );
 
     for( $i = 0; $i < count( $items ); $i++ ){
@@ -31,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "PUT") {
-    $file = "items.json";
     if(is_file($file)){
         $data = json_decode( file_get_contents("php://input") );
     
@@ -50,7 +53,6 @@ if ($_SERVER["REQUEST_METHOD"] == "PUT") {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-    $file = "items.json";
     if(is_file($file)){
         $item = json_decode( file_get_contents("php://input") );
     
